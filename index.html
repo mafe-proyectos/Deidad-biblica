@@ -1,0 +1,1937 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Doctrina de la Deidad Bíblica — Estudio Exegético No Trinitario</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:        #1a1208;
+  --parchment:  #f5f0e8;
+  --parchment2: #ede6d3;
+  --gold:       #b8860b;
+  --gold-light: #d4a820;
+  --crimson:    #8b1a1a;
+  --navy:       #1a2a4a;
+  --navy-mid:   #2e4a7a;
+  --slate:      #4a5568;
+  --accent:     #c8932a;
+  --highlight:  #fff3cd;
+  --card-bg:    #faf7f0;
+  --border:     #d4c9a8;
+  --shadow:     rgba(26,18,8,0.12);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Crimson Pro', Georgia, serif;
+  background: var(--parchment);
+  color: var(--ink);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ─── NOISE TEXTURE OVERLAY ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.6;
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--parchment2); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem 3rem;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(184,134,11,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(139,26,26,0.06) 0%, transparent 60%),
+    var(--parchment);
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--crimson), var(--gold), transparent);
+}
+
+.hero-ornament {
+  font-size: 1.1rem;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  text-transform: uppercase;
+  font-family: 'Space Mono', monospace;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 6vw, 4.8rem);
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  max-width: 900px;
+  margin-bottom: 0.6rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.4s forwards;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--crimson);
+}
+
+.hero-subtitle {
+  font-family: 'Crimson Pro', serif;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  color: var(--slate);
+  max-width: 680px;
+  margin: 0.8rem auto 2.5rem;
+  font-style: italic;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.6s forwards;
+}
+
+.hero-verse {
+  background: var(--card-bg);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.6rem;
+  max-width: 600px;
+  margin: 0 auto 2.8rem;
+  text-align: left;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.8s forwards;
+}
+
+.hero-verse blockquote {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--navy);
+  line-height: 1.5;
+}
+
+.hero-verse cite {
+  display: block;
+  margin-top: 0.4rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--crimson);
+  letter-spacing: 0.05em;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 1s forwards;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--slate);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.2rem;
+}
+
+/* ─── SEARCH ─── */
+.search-container {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  opacity: 0;
+  animation: fadeUp 0.8s 1.1s forwards;
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: 50px;
+  box-shadow: 0 8px 32px var(--shadow);
+  overflow: visible;
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+.search-box:focus-within {
+  border-color: var(--gold);
+  box-shadow: 0 12px 40px rgba(184,134,11,0.2);
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.2rem;
+  color: var(--gold);
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 1rem 7rem 1rem 3rem;
+  border: none;
+  outline: none;
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.1rem;
+  color: var(--ink);
+  background: transparent;
+  border-radius: 50px;
+}
+
+#searchInput::placeholder { color: #aaa; font-style: italic; }
+
+.search-btn {
+  position: absolute;
+  right: 6px;
+  background: linear-gradient(135deg, var(--gold), var(--crimson));
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 0.65rem 1.4rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+
+.search-btn:hover { transform: scale(1.04); box-shadow: 0 4px 16px rgba(184,134,11,0.4); }
+
+.search-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.tag {
+  padding: 0.3rem 0.9rem;
+  background: var(--parchment2);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--slate);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tag:hover { background: var(--gold); color: white; border-color: var(--gold); transform: translateY(-2px); }
+
+/* ─── SEARCH RESULTS DROPDOWN ─── */
+#searchResults {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0; right: 0;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  max-height: 460px;
+  overflow-y: auto;
+  z-index: 500;
+  display: none;
+}
+
+#searchResults.active { display: block; animation: dropIn 0.2s ease; }
+
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.result-item {
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid var(--parchment2);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.result-item:last-child { border-bottom: none; }
+.result-item:hover { background: var(--parchment); }
+
+.result-chapter {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.2rem;
+}
+
+.result-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.result-snippet {
+  font-size: 0.88rem;
+  color: var(--slate);
+  margin-top: 0.15rem;
+  line-height: 1.4;
+}
+
+.result-snippet mark {
+  background: var(--highlight);
+  color: var(--crimson);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: rgba(245,240,232,0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 54px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav-inner::-webkit-scrollbar { display: none; }
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+  white-space: nowrap;
+  margin-right: 1.5rem;
+  flex-shrink: 0;
+}
+
+.nav-logo span { color: var(--crimson); }
+
+.nav-links {
+  display: flex;
+  gap: 0.2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--slate);
+  text-decoration: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.nav-links a:hover { background: var(--parchment2); color: var(--navy); }
+.nav-links a.active { color: var(--crimson); font-weight: 700; }
+
+/* ─── MAIN LAYOUT ─── */
+.main-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  position: sticky;
+  top: 70px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.sidebar-header {
+  background: var(--navy);
+  color: white;
+  padding: 1rem 1.2rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.sidebar-toc {
+  padding: 0.5rem 0;
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+}
+
+.toc-item {
+  display: block;
+  padding: 0.55rem 1.2rem;
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.9rem;
+  color: var(--slate);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: all 0.2s;
+  line-height: 1.3;
+}
+
+.toc-item:hover { background: var(--parchment); border-left-color: var(--gold); color: var(--navy); }
+.toc-item.active { background: var(--parchment2); border-left-color: var(--crimson); color: var(--crimson); font-weight: 600; }
+.toc-item.sub { padding-left: 2rem; font-size: 0.82rem; }
+
+.chapter-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--gold);
+  display: block;
+  text-transform: uppercase;
+}
+
+/* ─── CONTENT ─── */
+.content { min-width: 0; }
+
+/* ─── CHAPTER SECTIONS ─── */
+.chapter-section {
+  margin-bottom: 4rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s, transform 0.6s;
+}
+
+.chapter-section.visible { opacity: 1; transform: translateY(0); }
+
+.chapter-header {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 2px solid var(--gold);
+}
+
+.chapter-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.4rem;
+}
+
+.chapter-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.2;
+}
+
+.chapter-divider {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--crimson), var(--gold));
+  margin-top: 0.8rem;
+  border-radius: 2px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--navy-mid);
+  margin: 2rem 0 0.8rem;
+  padding-left: 0.8rem;
+  border-left: 4px solid var(--gold-light);
+}
+
+.subsection-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.08rem;
+  font-style: italic;
+  color: var(--crimson);
+  margin: 1.5rem 0 0.6rem;
+}
+
+p {
+  font-size: 1.05rem;
+  margin-bottom: 0.9rem;
+  text-align: justify;
+  color: var(--ink);
+}
+
+/* ─── VERSE CARD ─── */
+.verse-card {
+  background: linear-gradient(135deg, #f0ebe0, #faf7f0);
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--navy);
+  border-radius: 0 10px 10px 0;
+  padding: 1.2rem 1.4rem;
+  margin: 1.2rem 0;
+  position: relative;
+}
+
+.verse-card::before {
+  content: '❝';
+  position: absolute;
+  top: -0.4rem;
+  left: 1rem;
+  font-size: 2rem;
+  color: var(--gold);
+  opacity: 0.5;
+  line-height: 1;
+}
+
+.verse-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--navy);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.verse-ref {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--crimson);
+  text-align: right;
+  letter-spacing: 0.04em;
+  display: block;
+}
+
+/* ─── GREEK TERM ─── */
+.greek-term {
+  background: #fdf8ee;
+  border: 1px solid #e8d9b0;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  margin: 0.6rem 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.greek-word {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--crimson);
+}
+
+.greek-translit {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--navy-mid);
+}
+
+.greek-meaning {
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.95rem;
+  color: var(--slate);
+  flex: 1;
+  min-width: 200px;
+}
+
+/* ─── TABLE ─── */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.92rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px var(--shadow);
+}
+
+.comparison-table thead tr {
+  background: var(--navy);
+  color: white;
+}
+
+.comparison-table th {
+  padding: 0.9rem 1rem;
+  text-align: left;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.comparison-table td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--parchment2);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.comparison-table tbody tr:nth-child(even) { background: var(--card-bg); }
+.comparison-table tbody tr:hover { background: var(--parchment2); }
+
+/* ─── BULLET LIST ─── */
+.bullet-list {
+  list-style: none;
+  margin: 0.8rem 0 1rem 0.5rem;
+}
+
+.bullet-list li {
+  padding: 0.3rem 0 0.3rem 1.5rem;
+  position: relative;
+  font-size: 1rem;
+}
+
+.bullet-list li::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size: 0.6rem;
+  top: 0.55rem;
+}
+
+/* ─── SYNTHESIS BOX ─── */
+.synthesis-box {
+  background: linear-gradient(135deg, #eaf0fb, #e8f4f8);
+  border: 1px solid #b8cce8;
+  border-radius: 10px;
+  padding: 1.2rem 1.4rem;
+  margin: 1.8rem 0;
+  position: relative;
+}
+
+.synthesis-box::before {
+  content: '◈ SÍNTESIS DOCTRINAL';
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--navy-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.7rem;
+  font-weight: 700;
+}
+
+.synthesis-box p {
+  font-size: 0.98rem;
+  color: var(--navy);
+  font-weight: 500;
+  text-align: left;
+  margin: 0;
+  line-height: 1.65;
+}
+
+/* ─── NOTE ─── */
+.note-box {
+  background: #fffbf0;
+  border: 1px solid #e8d58a;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  margin: 0.8rem 0;
+  font-size: 0.88rem;
+  color: #5a4a1a;
+  font-style: italic;
+}
+
+.note-box::before {
+  content: '⚑ Nota: ';
+  font-weight: 700;
+  font-style: normal;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--gold);
+}
+
+/* ─── TOPIC CARDS GRID ─── */
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.topic-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.2rem;
+  cursor: pointer;
+  transition: all 0.25s;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+}
+
+.topic-card:hover {
+  background: var(--navy);
+  color: white;
+  border-color: var(--navy);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(26,42,74,0.25);
+}
+
+.topic-card:hover .topic-icon { filter: brightness(3); }
+.topic-card:hover .topic-name { color: white; }
+.topic-card:hover .topic-desc { color: rgba(255,255,255,0.7); }
+
+.topic-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+
+.topic-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.3rem;
+  line-height: 1.3;
+  transition: color 0.25s;
+}
+
+.topic-desc {
+  font-size: 0.78rem;
+  color: var(--slate);
+  line-height: 1.4;
+  transition: color 0.25s;
+}
+
+/* ─── HIGHLIGHT ─── */
+.highlight { background: var(--highlight); border-radius: 3px; padding: 0 2px; }
+
+/* ─── TIMELINE ─── */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+  margin: 1.5rem 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0.55rem;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--gold), var(--crimson), var(--navy));
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 1.5rem 1rem;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem;
+  top: 0.35rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px var(--gold);
+}
+
+.timeline-date {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--crimson);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.2rem;
+}
+
+.timeline-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.3rem;
+}
+
+.timeline-desc {
+  font-size: 0.9rem;
+  color: var(--slate);
+  line-height: 1.5;
+}
+
+/* ─── BACK TO TOP ─── */
+#backToTop {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--navy);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s;
+  z-index: 300;
+  box-shadow: 0 4px 20px rgba(26,42,74,0.3);
+}
+
+#backToTop.visible { opacity: 1; }
+#backToTop:hover { background: var(--crimson); transform: translateY(-3px); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--navy);
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+  padding: 2rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+}
+
+footer span { color: var(--gold-light); }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .main-layout { grid-template-columns: 1fr; }
+  .sidebar { position: static; }
+  .sidebar-toc { max-height: 250px; }
+}
+
+@media (max-width: 600px) {
+  .hero-stats { gap: 1.5rem; }
+  .comparison-table { font-size: 0.8rem; }
+  .comparison-table th, .comparison-table td { padding: 0.5rem 0.6rem; }
+}
+
+/* ─── MODAL / LIGHTBOX ─── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  z-index: 800;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--parchment);
+  border-radius: 16px;
+  max-width: 720px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 2rem;
+  position: relative;
+  animation: fadeUp 0.3s ease;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+}
+
+.modal-close {
+  position: sticky;
+  top: 0;
+  float: right;
+  background: var(--crimson);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  z-index: 1;
+  margin-bottom: 1rem;
+}
+
+/* ─── PROGRESS BAR ─── */
+#readProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--crimson));
+  width: 0%;
+  z-index: 999;
+  transition: width 0.1s;
+}
+</style>
+</head>
+<body>
+
+<div id="readProgress"></div>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero" id="inicio">
+  <div class="hero-ornament">✦ Estudio Exegético · Académico · No Trinitario ✦</div>
+  <h1 class="hero-title">La Doctrina de la<br><em>Deidad Bíblica</em></h1>
+  <p class="hero-subtitle">Análisis exhaustivo de la Escritura en hebreo, arameo y griego koiné — Solo Scriptura como autoridad final</p>
+
+  <div class="hero-verse">
+    <blockquote>"Shema Yisra'el, YHWH Eloheinu, YHWH Echad — Oye, Israel: el SEÑOR nuestro Dios, el SEÑOR uno es."</blockquote>
+    <cite>Deuteronomio 6:4</cite>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">15</div><div class="stat-label">Capítulos</div></div>
+    <div class="stat"><div class="stat-num">80+</div><div class="stat-label">Versículos analizados</div></div>
+    <div class="stat"><div class="stat-num">11</div><div class="stat-label">Términos originales</div></div>
+    <div class="stat"><div class="stat-num">20+</div><div class="stat-label">Tablas comparativas</div></div>
+    <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Años de historia</div></div>
+  </div>
+
+  <div class="search-container">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Buscar: Shemá, Juan 1:1, Comma Johanneum, Trinidad…" autocomplete="off">
+      <button class="search-btn" onclick="performSearch()">Buscar</button>
+      <div id="searchResults"></div>
+    </div>
+    <div class="search-tags">
+      <span class="tag" onclick="quickSearch('Shemá')">Shemá</span>
+      <span class="tag" onclick="quickSearch('Juan 1:1')">Juan 1:1</span>
+      <span class="tag" onclick="quickSearch('Comma Johanneum')">Comma Johanneum</span>
+      <span class="tag" onclick="quickSearch('Trinity')">Trinidad</span>
+      <span class="tag" onclick="quickSearch('Elohim')">Elohim</span>
+      <span class="tag" onclick="quickSearch('Espíritu Santo')">Espíritu Santo</span>
+      <span class="tag" onclick="quickSearch('Nicea')">Nicea</span>
+      <span class="tag" onclick="quickSearch('Logos')">Logos</span>
+      <span class="tag" onclick="quickSearch('Echad')">Echad</span>
+      <span class="tag" onclick="quickSearch('Filipenses 2')">Filipenses 2</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ NAVIGATION ══════════ -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Deidad <span>Bíblica</span></div>
+    <ul class="nav-links">
+      <li><a href="#intro">Intro</a></li>
+      <li><a href="#historia">Historia</a></li>
+      <li><a href="#concilios">Concilios</a></li>
+      <li><a href="#monoteismo">Monoteísmo</a></li>
+      <li><a href="#padre">El Padre</a></li>
+      <li><a href="#lexicon">Léxico</a></li>
+      <li><a href="#hijo">El Hijo</a></li>
+      <li><a href="#espiritu">Espíritu</a></li>
+      <li><a href="#textos">Textos</a></li>
+      <li><a href="#critica">Crítica</a></li>
+      <li><a href="#comparacion">Comparación</a></li>
+      <li><a href="#patristicos">Patrística</a></li>
+      <li><a href="#problemas">Problemas</a></li>
+      <li><a href="#armonizacion">Armonización</a></li>
+      <li><a href="#conclusion">Conclusión</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ══════════ MAIN ══════════ -->
+<div class="main-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">📜 Índice General</div>
+    <div class="sidebar-toc">
+      <a href="#inicio" class="toc-item"><span class="chapter-num">Inicio</span>Portada y Búsqueda</a>
+      <a href="#intro" class="toc-item"><span class="chapter-num">Cap. 1</span>Introducción y Metodología</a>
+      <a href="#historia" class="toc-item"><span class="chapter-num">Cap. 2</span>Historia del Dogma Trinitario</a>
+      <a href="#concilios" class="toc-item"><span class="chapter-num">Cap. 3</span>Los Concilios Ecuménicos</a>
+      <a href="#monoteismo" class="toc-item"><span class="chapter-num">Cap. 4</span>El Monoteísmo Hebreo</a>
+      <a href="#padre" class="toc-item"><span class="chapter-num">Cap. 5</span>El Padre: Único Dios Verdadero</a>
+      <a href="#lexicon" class="toc-item"><span class="chapter-num">Cap. 6</span>Análisis Lingüístico</a>
+      <a href="#hijo" class="toc-item"><span class="chapter-num">Cap. 7</span>La Identidad del Hijo</a>
+      <a href="#espiritu" class="toc-item"><span class="chapter-num">Cap. 8</span>El Espíritu Santo</a>
+      <a href="#textos" class="toc-item"><span class="chapter-num">Cap. 9</span>Textos Trinitarios Clásicos</a>
+      <a href="#critica" class="toc-item"><span class="chapter-num">Cap. 10</span>Crítica Textual</a>
+      <a href="#comparacion" class="toc-item"><span class="chapter-num">Cap. 11</span>Comparación Doctrinal</a>
+      <a href="#patristicos" class="toc-item"><span class="chapter-num">Cap. 12</span>Testimonios Patrísticos</a>
+      <a href="#problemas" class="toc-item"><span class="chapter-num">Cap. 13</span>Problemas Filosóficos</a>
+      <a href="#armonizacion" class="toc-item"><span class="chapter-num">Cap. 14</span>Armonización Bíblica</a>
+      <a href="#conclusion" class="toc-item"><span class="chapter-num">Cap. 15</span>Conclusión Final</a>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- ── INTRO ── -->
+    <section class="chapter-section" id="intro">
+      <div class="chapter-header">
+        <div class="chapter-label">Capítulo 1</div>
+        <h2 class="chapter-title">Introducción: La Pregunta Fundamental sobre la Naturaleza de Dios</h2>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <h3 class="section-title">1.1 La Pregunta Central de la Teología</h3>
+      <p>Ninguna pregunta ha dividido más profundamente a la humanidad religiosa que la que inquiere por la naturaleza del ser divino: ¿Es Dios uno en sentido absoluto y singular, o existe una pluralidad de personas dentro de la divinidad? Esta pregunta determina la comprensión de la oración, la adoración, la soteriología y la pneumatología.</p>
+
+      <h3 class="section-title">1.2 Exploración por Temas</h3>
+      <p>Este estudio organiza el contenido por temas interactivos. Haz clic en cualquier tarjeta para profundizar:</p>
+
+      <div class="topic-grid">
+        <a href="#monoteismo" class="topic-card">
+          <div class="topic-icon">✡️</div>
+          <div class="topic-name">Monoteísmo Hebreo</div>
+          <div class="topic-desc">El Shemá y la unicidad de YHWH</div>
+        </a>
+        <a href="#lexicon" class="topic-card">
+          <div class="topic-icon">🔤</div>
+          <div class="topic-name">Léxico Original</div>
+          <div class="topic-desc">Hebreo, arameo y griego</div>
+        </a>
+        <a href="#historia" class="topic-card">
+          <div class="topic-icon">📜</div>
+          <div class="topic-name">Historia del Dogma</div>
+          <div class="topic-desc">De los apóstoles a Nicea</div>
+        </a>
+        <a href="#critica" class="topic-card">
+          <div class="topic-icon">🔬</div>
+          <div class="topic-name">Crítica Textual</div>
+          <div class="topic-desc">El Comma Johanneum y más</div>
+        </a>
+        <a href="#hijo" class="topic-card">
+          <div class="topic-icon">✝️</div>
+          <div class="topic-name">Identidad del Hijo</div>
+          <div class="topic-desc">Juan 1:1, Filipenses 2, Col. 1</div>
+        </a>
+        <a href="#espiritu" class="topic-card">
+          <div class="topic-icon">🕊️</div>
+          <div class="topic-name">Espíritu Santo</div>
+          <div class="topic-desc">Presencia de Dios o tercera persona</div>
+        </a>
+        <a href="#concilios" class="topic-card">
+          <div class="topic-icon">⚖️</div>
+          <div class="topic-name">Concilios</div>
+          <div class="topic-desc">Nicea, Constantinopla, Calcedonia</div>
+        </a>
+        <a href="#comparacion" class="topic-card">
+          <div class="topic-icon">📊</div>
+          <div class="topic-name">Comparación</div>
+          <div class="topic-desc">Trinidad vs Unitarismo vs Modalismo</div>
+        </a>
+      </div>
+
+      <h3 class="section-title">1.3 Definición de Términos Clave</h3>
+      <table class="comparison-table">
+        <thead><tr><th>Término</th><th>Definición</th><th>Contexto</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Monoteísmo estricto</strong></td><td>Un solo Dios que es una sola persona: el Padre</td><td>Hebreo bíblico, Islam, Judaísmo</td></tr>
+          <tr><td><strong>Trinitarismo</strong></td><td>Un solo Dios en tres personas coiguales y coeternas</td><td>Nicea 325 → Constantinopla 381</td></tr>
+          <tr><td><strong>Binitarismo</strong></td><td>Dios en dos personas: Padre e Hijo; Espíritu = poder</td><td>Judeocristianismo temprano</td></tr>
+          <tr><td><strong>Modalismo</strong></td><td>Un Dios que se manifiesta en tres modos sucesivos</td><td>Sabelio, s. III d.C.</td></tr>
+          <tr><td><strong>Arrianismo</strong></td><td>El Hijo fue creado antes del tiempo; no coigual</td><td>Arrio de Alejandría, s. IV</td></tr>
+          <tr><td><strong>Hypostasis</strong></td><td>Centro individual de subsistencia; "persona" trinitaria</td><td>Filosofía griega aristotélica</td></tr>
+        </tbody>
+      </table>
+
+      <div class="synthesis-box">
+        <p>El punto de partida metodológico legítimo para cualquier doctrina de Dios es el texto bíblico leído en su contexto original, no los credos del siglo IV formulados en categorías filosóficas griegas ajenas al pensamiento hebreo bíblico.</p>
+      </div>
+    </section>
+
+    <!-- ── HISTORIA ── -->
+    <section class="chapter-section" id="historia">
+      <div class="chapter-header">
+        <div class="chapter-label">Capítulo 2</div>
+        <h2 class="chapter-title">Historia del Dogma Trinitario: De la Escritura a Nicea</h2>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <h3 class="section-title">2.1 Línea de Tiempo del Desarrollo Doctrinal</h3>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">30–100 d.C.</div>
+          <div class="timeline-title">Período Apostólico</div>
+          <div class="timeline-desc">El NT no contiene formulación trinitaria explícita. El Padre es identificado como "Dios" (Theos); Jesús como "Señor" (Kyrios). Estructura paulina: "gracia y paz de parte de Dios nuestro Padre y del Señor Jesucristo."</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">100–150 d.C.</div>
+          <div class="timeline-title">Padres Apostólicos</div>
+          <div class="timeline-desc">Clemente de Roma, Ignacio de Antioquía, el Pastor de Hermas. Cristología en desarrollo; distinción Padre–Hijo con subordinacionismo implícito.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">150–200 d.C.</div>
+          <div class="timeline-title">Justino Mártir y los Apologistas</div>
+          <div class="timeline-desc">Teología del Logos influida por el platonismo. El Hijo es "segundo Dios" (deuteros Theos) subordinado al Padre. Justino ora al Padre "en segundo lugar."</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">200–260 d.C.</div>
+          <div class="timeline-title">Tertuliano y Orígenes</div>
+          <div class="timeline-desc">Tertuliano acuña "trinitas" pero enseña subordinación del Hijo. Orígenes: "el Hijo alcanza solo a los seres racionales; es inferior al Padre." El Hijo es "segundo Dios."</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">260–325 d.C.</div>
+          <div class="timeline-title">Crisis Arriana</div>
+          <div class="timeline-desc">Arrio: "hubo un tiempo en que el Hijo no existía." Atanasio: el Hijo es homoousios (misma esencia) con el Padre. Debate que dividió el Imperio Romano.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">325 d.C.</div>
+          <div class="timeline-title">Concilio de Nicea</div>
+          <div class="timeline-desc">~300 obispos convocados por Constantino I. Adopción del homoousios. Condena del arrianismo. Pero el debate continúa 56 años más.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">381 d.C.</div>
+          <div class="timeline-title">Concilio de Constantinopla I</div>
+          <div class="timeline-desc">Triunfo definitivo del trinitarismo. El Espíritu Santo incluido como "Señor y dador de vida." Credo Niceno-Constantinopolitano en su forma actual.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">451 d.C.</div>
+          <div class="timeline-title">Concilio de Calcedonia</div>
+          <div class="timeline-desc">Una persona de Cristo en dos naturalezas: "sin confusión, sin cambio, sin división, sin separación." Rechazo del monofisismo y del nestorianismo.</div>
+        </div>
+      </div>
+
+      <h3 class="section-title">2.2 El Período Apostólico (30–100 d.C.)</h3>
+
+      <div class="verse-card">
+        <p class="verse-text">Gracia a vosotros y paz de parte de Dios nuestro Padre y del Señor Jesucristo.</p>
+        <span class="verse-ref">1 Corintios 1:3 — Fórmula repetida en Rom. 1:7; Gál. 1:3; Ef. 1:2; Fil. 1:2; Col. 1:2; 1 Tes. 1:1; 2 Tes. 1:2; Flm. 1:3</span>
+      </div>
+
+      <p>En esta fórmula estereotipada, el Padre es identificado como "Dios" (theos) y Jesús como "Señor" (kyrios), no como segundo Dios ni como segunda persona de una Trinidad. Si Pablo hubiera querido enseñar la coigualdad trinitaria, este habría sido el lugar natural para hacerlo explícito.</p>
+
+      <div class="synthesis-box">
+        <p>La doctrina trinitaria en su forma técnica no proviene directamente de los escritos del Nuevo Testamento, sino de un proceso histórico de debate filosófico-teológico entre los siglos II y V d.C., influenciado significativamente por categorías platónicas y aristotélicas del mundo grecorromano.</p>
+      </div>
+    </section>
+
+    <!-- ── CONCILIOS ── -->
+    <section class="chapter-section" id="concilios">
+      <div class="chapter-header">
+        <div class="chapter-label">Capítulo 3</div>
+        <h2 class="chapter-title">Los Concilios Ecuménicos y la Formulación Doctrinal</h2>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <h3 class="section-title">3.1 Influencia Filosófica Griega en los Concilios</h3>
+
+      <table class="comparison-table">
+        <thead><tr><th>Concepto Griego</th><th>Origen</th><th>Adopción en Teología Trinitaria</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Ousia</strong> (esencia)</td><td>Aristóteles, Metafísica</td><td>Única esencia divina de las tres personas</td></tr>
+          <tr><td><strong>Hypostasis</strong> (subsistencia)</td><td>Neoplatonismo de Plotino</td><td>Tres hipóstasis = tres personas en una esencia</td></tr>
+          <tr><td><strong>Logos</strong> (razón/palabra)</td><td>Heráclito, Platón, Filón</td><td>Identificación del Hijo/Cristo con el Logos preexistente</td></tr>
+          <tr><td><strong>Prosopon</strong> (máscara)</td><td>Teatro griego, Estoicismo</td><td>Precursor de "persona" en sentido trinitario</td></tr>
+          <tr><td><strong>Homoousios</strong> (misma esencia)</td><td>Gnósticos valentinianos</td><td>Relación Padre–Hijo adoptada en Nicea 325</td></tr>
+          <tr><td><strong>Perichoresis</strong></td><td>Juan Damasceno, s. VIII</td><td>Mutua inhabitación de las tres personas</td></tr>
+        </tbody>
+      </table>
+
+      <div class="note-box">El término homoousios fue utilizado por gnósticos valentinianos ANTES de ser adoptado en Nicea. Atanasio mismo reconoce esta incomodidad terminológica en De Synodis.</div>
+
+      <h3 class="section-title">3.2 El Gran Debate: Posiciones en Nicea (325 d.C.)</h3>
+
+      <table class="comparison-table">
+        <thead><tr><th>Posición</th><th>Representante</th><th>Afirmación Clave</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Arrianismo</strong></td><td>Arrio de Alejandría</td><td>El Hijo fue creado antes del tiempo; no es Dios en sentido pleno</td><td>❌ Condenado. Arrio exiliado</td></tr>
+          <tr><td><strong>Homoousios</strong></td><td>Atanasio de Alejandría</td><td>El Hijo es de la misma esencia que el Padre</td><td>✅ Adoptado en el Credo de Nicea</td></tr>
+          <tr><td><strong>Homoiousios</strong></td><td>Eusebio de Nicomedia</td><td>Esencia SIMILAR al Padre (difiere solo una "i")</td><td>⚠️ Rechazado por ambigüedad</td></tr>
+          <tr><td><strong>Subordinacionismo</strong></td><td>Orígenes (indirecto)</td><td>El Hijo es "segundo Dios" ontológicamente inferior</td><td>〰️ Parcialmente absorbido</td></tr>
+        </tbody>
+      </table>
+
+      <div class="synthesis-box">
+        <p>Los concilios ecuménicos representan elaboraciones filosóficas sobre datos bíblicos, profundamente influidas por el pensamiento platónico y aristotélico. Su autoridad no es escritural sino eclesiástica y política. La pregunta crítica: ¿corresponden estas formulaciones al testimonio original de la Escritura?</p>
+      </div>
+    </section>
+
+    <!-- ── MONOTEÍSMO ── -->
+    <section class="chapter-section" id="monoteismo">
+      <div class="chapter-header">
+        <div class="chapter-label">Capítulo 4</div>
+        <h2 class="chapter-title">El Monoteísmo Hebreo Bíblico — Análisis del Shemá</h2>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <h3 class="section-title">4.1 El Shemá Yisrael: Texto Fundacional</h3>
+
+      <div class="verse-card">
+        <p class="verse-text">שְׁמַע יִשְׂרָאֵל יְהוָה אֱלֹהֵינוּ יְהוָה אֶחָד<br><em>Shema Yisra'el, YHWH Eloheinu, YHWH Echad.</em></p>
+        <span class="verse-ref">Deuteronomio 6:4 — Texto hebreo con transliteración</span>
+      </div>
+
+      <div class="verse-card">
+        <p class="verse-text">"Oye, Israel: El SEÑOR nuestro Dios, el SEÑOR uno es."</p>
+        <span class="verse-ref">Deuteronomio 6:4 (RVR60) — La confesión central del judaísmo por 3,000 años</span>
+      </div>
+
+      <h3 class="section-title">4.2 El Debate Echad vs. Yachid</h3>
+      <p>Algunos apologetas trinitarios argumentan que el uso de <em>echad</em> en el Shemá, en lugar de <em>yachid</em> (unicidad absoluta), permite o incluso implica una "unidad compuesta". Examinemos con rigor:</p>
+
+      <table class="comparison-table">
+        <thead><tr><th>Término Hebreo</th><th>Transliteración</th><th>Strong</th><th>Uso</th><th>Ejemplo</th></tr></thead>
+        <tbody>
+          <tr><td><strong>אֶחָד</strong></td><td>Echad</td><td>H259</td><td>960+ veces para "uno" estándar</td><td>Gén. 1:5: "un día"; Gén. 2:24: "una sola carne"</td></tr>
+          <tr><td><strong>יָחִיד</strong></td><td>Yachid</td><td>H3173</td><td>12 veces; unicidad exclusiva</td><td>Gén. 22:2: "tu hijo, tu único hijo Isaac"</td></tr>
+        </tbody>
+      </table>
+
+      <p><strong>Respuesta exegética:</strong> El argumento trinitario comete la "falacia del lexema": transferir el significado de un contexto a otro de manera ilegítima. El judaísmo —que recibió, preservó y vivió este texto durante milenios— nunca lo interpretó como insinuando pluralidad dentro de Dios.</p>
+
+      <h3 class="section-title">4.3 El Plural Elohim: ¿Evidencia de Pluralidad Divina?</h3>
+
+      <div class="greek-term">
+        <span class="greek-word">Elohim (אֱלֹהִים)</span>
+        <span class="greek-translit">Elohim</span>
+        <span class="greek-meaning">Plural del singular El/Eloah. Strong H430. ~2,570 veces en el AT. Usado para el único Dios de Israel, dioses paganos, ángeles (Sal. 82:6), y jueces (Éx. 21:6). Rige verbos SINGULARES cuando se refiere al Dios de Israel.</span>
+      </div>
+
+      <p><strong>El argumento trinitario:</strong> Elohim es plural → Dios es plural en personas.</p>
+      <p><strong>La respuesta lingüística:</strong> Los hebraístas reconocen en Elohim un "plural de majestad" o "plural intensivo/elativo". Ejemplos paralelos:</p>
+
+      <ul class="bullet-list">
+        <li><strong>Baalim</strong> (plural de Baal): usado para el dios Baal singular (1 Reyes 18:21)</li>
+        <li><strong>Adonim</strong> (plural de Señor): para un único señor humano (Génesis 39:2)</li>
+        <li><strong>Génesis 1:1:</strong> "creó (bara = singular) Elohim" — confirma uso gramatical singular</li>
+      </ul>
+
+      <div class="note-box">Wilhelm Gesenius (Gesenius' Hebrew Grammar, §124g) señala explícitamente que Elohim referido al Dios de Israel es un "plural de majestad" y rige verbos en singular. Esto está universalmente reconocido en la gramática hebraica académica.</div>
+
+      <h3 class="section-title">4.4 Génesis 1:26 — "¿Hagamos al hombre a nuestra imagen?"</h3>
+
+      <div class="verse-card">
+        <p class="verse-text">"Y dijo Dios: Hagamos al hombre a nuestra imagen, conforme a nuestra semejanza..."</p>
+        <span class="verse-ref">Génesis 1:26 (RVR60)</span>
+      </div>
+
+      <p><strong>Interpretación trinitaria:</strong> Dios se dirige a las otras personas de la Trinidad.</p>
+      <p><strong>Interpretaciones alternativas exegéticamente respaldadas:</strong></p>
+
+      <ul class="bullet-list">
+        <li><strong>Plural deliberativo:</strong> El hablante en primera persona plural para enfatizar la gravedad de la decisión</li>
+        <li><strong>Plural de majestad:</strong> El mismo fenómeno de Elohim</li>
+        <li><strong>Consejo celestial:</strong> Dios comunica su decisión a los ángeles (Job 1:6; Isaías 6:8; 1 Reyes 22:19)</li>
+      </ul>
+
+      <p><strong>Objeción decisiva:</strong> Génesis 1:27 responde con singular: "Y creó (singular) Dios al hombre <em>a su imagen</em>" — no "a la imagen de ellos". El singular confirma que Dios es uno.</p>
+
+      <div class="synthesis-box">
+        <p>El monoteísmo hebreo bíblico afirma de manera inequívoca que YHWH es uno: numéricamente uno, no compuesto de tres personas. El plural Elohim y el plural de Génesis 1:26 se explican mejor por fenómenos gramaticales hebreos bien documentados que por pluralidad de personas divinas.</p>
+      </div>
+    </section>
+
+    <!-- ── PADRE ── -->
+    <section class="chapter-section" id="padre">
+      <div class="chapter-header">
+        <div class="chapter-label">Capítulo 5</div>
+        <h2 class="chapter-title">El Padre como Único Dios Verdadero</h2>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <h3 class="section-title">5.1 Juan 17:3 — La Declaración Más Directa</h3>
+
+      <div class="verse-card">
+        <p class="verse-text">"Y esta es la vida eterna: que te conozcan a ti, el único Dios verdadero, y a Jesucristo, a quien has enviado."</p>
+        <span class="verse-ref">Juan 17:3 (RVR60) — Palabras directas de Jesús al Padre</span>
+      </div>
+
+      <p><em>Texto griego:</em> <strong>"ton monon alethon Theon"</strong> (τὸν μόνον ἀληθινὸν Θεόν) — "el único verdadero Dios". El adjetivo <em>monon</em> = "solo, único, exclusivo". <em>Alethinos</em> = "genuino, real". Jesús se excluye a sí mismo de la categoría "el único Dios verdadero".</p>
+
+      <h3 class="section-title">5.2 1 Corintios 8:4-6 — Un Solo Dios y un Solo Señor</h3>
+
+      <div class="verse-card">
+        <p class="verse-text">"...para nosotros, sin embargo, solo hay un Dios, el Padre, del cual proceden todas las cosas... y un Señor, Jesucristo, por medio del cual son todas las cosas..."</p>
+        <span class="verse-ref">1 Corintios 8:4-6 (RVR60) — Pablo reformula el Shemá</span>
+      </div>
+
+      <table class="comparison-table">
+        <thead><tr><th>Categoría</th><th>Persona</th><th>Preposición griega</th><th>Función</th></tr></thead>
+        <tbody>
+          <tr><td><strong>UN SOLO DIOS</strong> (heis Theos)</td><td>El PADRE</td><td>ek (de/desde) — origen</td><td>De quien proceden todas las cosas</td></tr>
+          <tr><td><strong>UN SOLO SEÑOR</strong> (heis Kyrios)</td><td>JESUCRISTO</td><td>dia (por medio de) — mediación</td><td>Por quien son todas las cosas</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="section-title">5.3 Testimonios Directos de Jesús sobre el Padre</h3>
+
+      <div class="verse-card">
+        <p class="verse-text">"Mi Padre mayor es que yo."</p>
+        <span class="verse-ref">Juan 14:28 (RVR60)</span>
+      </div>
+
+      <div class="verse-card">
+        <p class="verse-text">"Pero del día y la hora nadie sabe, ni aun los ángeles de los cielos, sino solo mi Padre."</p>
+        <span class="verse-ref">Mateo 24:36 (RVR60)</span>
+      </div>
+
+      <div class="verse-card">
+        <p class="verse-text">"¿Por qué me llamas bueno? Ninguno hay bueno, sino solo uno, que es Dios."</p>
+        <span class="verse-ref">Marcos 10:18 (RVR60)</span>
+      </div>
+
+      <div class="synthesis-box">
+        <p>El NT, por boca del propio Jesús y del apóstol Pablo, identifica al Padre como "el único Dios verdadero" (Juan 17:3), "el único Dios" (1 Corintios 8:6), y "único y sabio Dios" (1 Timoteo 1:17). Cristo recibe el título Kyrios (Señor) y Mediador, pero el título Theos (Dios) se reserva predominantemente para el Padre.</p>
+      </div>
+    </section>
+
+    <!-- ── LÉXICO ── -->
+    <section class="chapter-section" id="lexicon">
+      <div class="chapter-header">
+        <div class="chapter-label">Capítulo 6</div>
+        <h2 class="chapter-title">Análisis Lingüístico de los Títulos Divinos</h2>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <h3 class="section-title">6.1 Términos Hebreos</h3>
+
+      <div class="greek-term">
+        <span class="greek-word">YHWH (יהוה)</span>
+        <span class="greek-translit">Yahweh / Yehowah</span>
+        <span class="greek-meaning">El nombre personal de Dios. Strong H3068. Tetragrámaton. Relacionado con hayah (ser/existir). Significa "Él es", "El Eterno". 6,828 apariciones en el AT.</span>
+      </div>
+
+      <div class="greek-term">
+        <span class="greek-word">Elohim (אֱלֹהִים)</span>
+        <span class="greek-translit">Elohim</span>
+        <span class="greek-meaning">Plural de majestad de El/Eloah. Strong H430. ~2,570 veces. El nombre divino más común en el AT. Rige verbos singulares referido al Dios de Israel.</span>
+      </div>
+
+      <div class="greek-term">
+        <span class="greek-word">Adonai (אֲדֹנָי)</span>
+        <span class="greek-translit">Adonai</span>
+        <span class="greek-meaning">Señor, Soberano. Strong H136. Plural de majestad de adon. Sustituto vocal del Tetragrámaton en la lectura de la Torá. Título de soberanía, no nombre propio.</span>
+      </div>
+
+      <div class="greek-term">
+        <span class="greek-word">Ruaj (רוּחַ)</span>
+        <span class="greek-translit">Ruaj</span>
+        <span class="greek-meaning">Viento, aliento, espíritu. Strong H7307. "Ruaj Elohim" = la presencia activa y el poder de YHWH. No implica una persona separada en el contexto veterotestamentario.</span>
+      </div>
+
+      <h3 class="section-title">6.2 Términos Griegos del NT</h3>
+
+      <div class="greek-term">
+        <span class="greek-word">Theos (Θεός)</span>
+        <span class="greek-translit">Theos</span>
+        <span class="greek-meaning">Dios. Traducción griega de Elohim/YHWH en la LXX. En el NT, "ho Theos" (con artículo) se refiere predominantemente al Padre. Aplicado directamente a Jesús solo en textos gramaticalmente debatidos.</span>
+      </div>
+
+      <div class="greek-term">
+        <span class="greek-word">Kyrios (Κύριος)</span>
+        <span class="greek-translit">Kyrios</span>
+        <span class="greek-meaning">Señor, Soberano. Strong G2962. En la LXX, reemplaza el Tetragrámaton YHWH. En el NT, aplicado a Cristo indica exaltación y autoridad soberana, no necesariamente identidad con el Padre YHWH.</span>
+      </div>
+
+      <div class="greek-term">
+        <span class="greek-word">Logos (Λόγος)</span>
+        <span class="greek-translit">Logos</span>
+        <span class="greek-meaning">Palabra, razón, discurso. Strong G3056. En Juan 1, identifica al Hijo preexistente. Tenía resonancias en el judaísmo helenístico (Filón) y la filosofía griega (Heráclito, estoicos). Su uso no implica automáticamente identidad ontológica con el Padre.</span>
+      </div>
+
+      <div class="greek-term">
+        <span class="greek-word">Monogenes (μονογενής)</span>
+        <span class="greek-translit">Monogenes</span>
+        <span class="greek-meaning">Unigénito, único. Strong G3439. Monos (único) + genos (clase/género/nacimiento). Juan 1:14; 1:18; 3:16; 3:18. "Generación" implica derivación, históricamente problemático para la coigualdad trinitaria.</span>
+      </div>
+
+      <div class="greek-term">
+        <span class="greek-word">Pneuma (Πνεῦμα)</span>
+        <span class="greek-translit">Pneuma</span>
+        <span class="greek-meaning">Espíritu, viento, aliento. Strong G4151. Traducción del hebreo ruaj. "Pneuma Hagion" (Espíritu Santo). El NT usa "Espíritu de Dios" y "Espíritu de Cristo" como equivalentes (Rom. 8:9), sugiriendo que es la presencia divina, no una tercera persona separada.</span>
+      </div>
+
+      <div class="greek-term">
+        <span class="greek-word">Huios tou Theou (Υἱὸς τοῦ Θεοῦ)</span>
+        <span class="greek-translit">Huios tou Theou</span>
+        <span class="greek-meaning">Hijo de Dios. En el AT y judaísmo, designa ángeles, al rey davídico, al pueblo de Israel (Éx. 4:22; Sal. 2:7), o al hombre justo. No implica automáticamente identidad ontológica con Dios.</span>
+      </div>
+
+      <div class="synthesis-box">
+        <p>El análisis lingüístico cuidadoso revela que el NT distingue consistentemente entre el Padre como "el Dios" (ho Theos) y el Hijo como "el Señor" (ho Kyrios). La aplicación de textos del AT sobre YHWH a Jesucristo puede indicar autoridad delegada y representación divina, no necesariamente identidad ontológica.</p>
+      </div>
+    </section>
+
+    <!-- ── HIJO ── -->
+    <section class="chapter-section" id="hijo">
+      <div class="chapter-header">
+        <div class="chapter-label">Capítulo 7</div>
+        <h2 class="chapter-title">La Identidad del Hijo: Preexistencia, Naturaleza y Relación</h2>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <h3 class="section-title">7.1 Juan 1:1 — El Texto Más Debatido</h3>
+
+      <div class="verse-card">
+        <p class="verse-text">"En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios."</p>
+        <span class="verse-ref">Juan 1:1 (RVR60) — Texto griego: "kai Theos en ho Logos"</span>
+      </div>
+
+      <p><strong>La gramática griega es crucial:</strong> El sustantivo "Theos" carece de artículo determinado, mientras que "Logos" tiene el artículo. En griego, cuando el predicado nominal precede al verbo copulativo y carece de artículo, típicamente indica una <em>cualidad o naturaleza</em>, no identidad.</p>
+
+      <table class="comparison-table">
+        <thead><tr><th>Interpretación</th><th>Traducción</th><th>Justificación</th></tr></thead>
+        <tbody>
+          <tr><td>Trinitaria estándar</td><td>"el Verbo era Dios" (identidad plena)</td><td>Regla de Colwell (1933): predicados definidos sin artículo</td></tr>
+          <tr><td>Testigos de Jehová</td><td>"el Verbo era un dios"</td><td>❌ El griego no usa artículo indefinido; introduce politeísmo</td></tr>
+          <tr><td>Académicamente neutra</td><td>"el Verbo era de naturaleza divina / tenía carácter divino"</td><td>Philip B. Harner (JBL, 1973): ausencia de artículo indica cualidad</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="section-title">7.2 Juan 10:30 — "El Padre y yo somos uno"</h3>
+
+      <div class="verse-card">
+        <p class="verse-text">"Yo y el Padre uno somos."</p>
+        <span class="verse-ref">Juan 10:30 (RVR60) — Texto griego: "ego kai ho Pater hen esmen"</span>
+      </div>
+
+      <p>El pronombre neutro <strong>"hen"</strong> (una cosa) — no "heis" (uno masculino, identidad personal). Nótese que Jesús usa el mismo término en Juan 17:21-22 para la unidad de los discípulos con Dios: <em>"para que todos sean uno (hen)"</em>. Si Juan 10:30 prueba identidad de esencia trinitaria, Juan 17:21 probaría que los discípulos son de la misma esencia que Dios — conclusión absurda.</p>
+
+      <h3 class="section-title">7.3 Filipenses 2:5-11 — La Kénosis</h3>
+
+      <div class="verse-card">
+        <p class="verse-text">"...el cual, siendo en forma de Dios, no estimó el ser igual a Dios como cosa a que aferrarse, sino que se despojó a sí mismo... Por lo cual Dios también le exaltó hasta lo sumo, y le dio un nombre que es sobre todo nombre..."</p>
+        <span class="verse-ref">Filipenses 2:6-9 (RVR60)</span>
+      </div>
+
+      <table class="comparison-table">
+        <thead><tr><th>Interpretación</th><th>Lógica</th><th>Implicación</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Trinitaria</strong> (res rapta): Cristo poseía la igualdad y no la retuvo</td><td>Tenía la igualdad; eligió no usarla</td><td>Apoya preexistencia divina plena</td></tr>
+          <tr><td><strong>Alternativa</strong> (res rapienda): Cristo no buscó igualarse a Dios</td><td>No consideró la igualdad como algo a conseguir</td><td>Compatible con subordinación real al Padre</td></tr>
+        </tbody>
+      </table>
+
+      <p>El hecho de que Dios "le <em>exaltó</em> hasta lo sumo y le <em>dio</em> un nombre" (v. 9) es problemático para la coigualdad: si Cristo ya era coigual y coeterno, ¿qué significaría ser "exaltado" y recibir un nombre como "don"? La exaltación implica movimiento desde un estado inferior.</p>
+
+      <div class="synthesis-box">
+        <p>La identidad del Hijo en el NT es la de un ser preexistente que actúa como agente de Dios en la creación y en la revelación. Los textos son compatibles tanto con la cristología trinitaria como con una cristología de subordinación. La diferencia clave: ¿implica la preexistencia coigualdad ontológica o preexistencia de un ser derivado y subordinado al Padre?</p>
+      </div>
+    </section>
+
+    <!-- ── ESPÍRITU ── -->
+    <section class="chapter-section" id="espiritu">
+      <div class="chapter-header">
+        <div class="chapter-label">Capítulo 8</div>
+        <h2 class="chapter-title">El Espíritu Santo: Espíritu de Dios o Tercera Persona Divina</h2>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <div class="verse-card">
+        <p class="verse-text">"¿A dónde me iré de tu Espíritu? ¿Y a dónde huiré de tu presencia?"</p>
+        <span class="verse-ref">Salmo 139:7 — El Espíritu es paralelo a la "presencia" (panim) de Dios</span>
+      </div>
+
+      <p>El paralelismo poético hebreo identifica el Espíritu de Dios con la <em>presencia</em> de Dios mismo. No son dos realidades distintas; son expresiones paralelas de la misma realidad.</p>
+
+      <div class="verse-card">
+        <p class="verse-text">"Mas vosotros no vivís según la carne, sino según el Espíritu, si es que el Espíritu de Dios mora en vosotros. Y si alguno no tiene el Espíritu de Cristo, no es de él."</p>
+        <span class="verse-ref">Romanos 8:9 — "Espíritu de Dios" = "Espíritu de Cristo" en el mismo versículo</span>
+      </div>
+
+      <p>Pablo equipara en un solo versículo el "Espíritu de Dios" con el "Espíritu de Cristo". Si el Espíritu fuera una tercera persona separada del Padre y del Hijo, sería extraño llamarlo simultáneamente de ambos. La equivalencia sugiere que el Espíritu es la presencia activa tanto del Padre como del Hijo, no una persona separada.</p>
+
+      <div class="verse-card">
+        <p class="verse-text">"Pero cuando venga el Espíritu de verdad, él os guiará a toda la verdad; porque no hablará por su propia cuenta, sino que hablará todo lo que oyere."</p>
+        <span class="verse-ref">Juan 16:13 — El Espíritu "no habla por su propia cuenta"</span>
+      </div>
+
+      <p>El Espíritu "no hablará por su propia cuenta". Esto indica subordinación y dependencia, difícilmente compatible con una persona coigual. Una persona coigual con el Padre no hablaría "lo que oyere" de otro.</p>
+
+      <div class="synthesis-box">
+        <p>El Espíritu Santo en la Escritura es presentado como el poder, la presencia y la actividad de Dios en el mundo — no como una tercera persona separada y coigual. La equiparación "Espíritu de Dios = Espíritu de Cristo" (Romanos 8:9) y el paralelismo "Espíritu = presencia de Dios" (Salmo 139:7) apuntan hacia la comprensión del Espíritu como la presencia personal de Dios mismo en los creyentes.</p>
+      </div>
+    </section>
+
+    <!-- ── TEXTOS ── -->
+    <section class="chapter-section" id="textos">
+      <div class="chapter-header">
+        <div class="chapter-label">Capítulo 9</div>
+        <h2 class="chapter-title">Análisis Exegético de los Textos Trinitarios Clásicos</h2>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <h3 class="section-title">9.1 Mateo 28:19 — La Fórmula Bautismal</h3>
+
+      <div class="verse-card">
+        <p class="verse-text">"Por tanto, id, y haced discípulos a todas las naciones, bautizándolos en el nombre del Padre, y del Hijo, y del Espíritu Santo."</p>
+        <span class="verse-ref">Mateo 28:19 (RVR60)</span>
+      </div>
+
+      <ul class="bullet-list">
+        <li>La fórmula usa el singular <strong>"nombre"</strong> (onoma), no el plural "nombres" (onomata)</li>
+        <li>En el libro de Hechos, el bautismo se administra consistentemente <strong>"en el nombre de Jesucristo"</strong> (Hechos 2:38; 8:16; 10:48; 19:5), nunca con la fórmula triádica</li>
+        <li>Eusebio de Cesarea, antes de Nicea, cita Mateo 28:19 en forma más corta: <em>"id en mi nombre"</em> — múltiples veces en sus escritos preconciliares</li>
+      </ul>
+
+      <h3 class="section-title">9.2 Isaías 9:6 — "Dios fuerte, Padre eterno"</h3>
+
+      <div class="verse-card">
+        <p class="verse-text">"...y se llamará su nombre Admirable, Consejero, Dios fuerte, Padre eterno, Príncipe de paz."</p>
+        <span class="verse-ref">Isaías 9:6 (RVR60)</span>
+      </div>
+
+      <p>El título <strong>"El Gibbor"</strong> (Dios fuerte) aparece también en Isaías 10:21 refiriéndose al único Dios de Israel. El título "Padre eterno" (Abi-Ad) es notable: si Cristo fuera el Hijo eterno de la Trinidad, llamarlo "Padre eterno" sería teológicamente problemático dentro del propio trinitarismo, donde Padre e Hijo son personas distintas.</p>
+
+      <h3 class="section-title">9.3 Hebreos 1 — El Hijo como Imagen del Padre</h3>
+
+      <div class="verse-card">
+        <p class="verse-text">"...el cual, siendo el resplandor de su gloria, y la imagen misma de su sustancia... se sentó a la diestra de la Majestad en las alturas."</p>
+        <span class="verse-ref">Hebreos 1:3 (RVR60)</span>
+      </div>
+
+      <p><strong>Charakter</strong> = "sello, impronta, imagen exacta". Un sello ES la imagen exacta de su matriz, pero no ES idéntico a la matriz. El Hijo es la perfecta representación del Padre sin ser idéntico al Padre en persona. Y el v. 9: "te ha ungido Dios, <em>el Dios tuyo</em>" — el Hijo tiene "un Dios", lo que indica distinción.</p>
+
+      <div class="synthesis-box">
+        <p>Los textos clásicamente citados en apoyo de la Trinidad son exegéticamente ricos. Algunos afirman la divinidad y preexistencia del Hijo. Sin embargo, ninguno de ellos, leído en su contexto gramatical e histórico sin presuposiciones trinitarias, afirma explícitamente la doctrina de tres personas coiguales y coeternas en una esencia.</p>
+      </div>
+    </section>
+
+    <!-- ── CRÍTICA TEXTUAL ── -->
+    <section class="chapter-section" id="critica">
+      <div class="chapter-header">
+        <div class="chapter-label">Capítulo 10</div>
+        <h2 class="chapter-title">Crítica Textual: El Comma Johanneum y otras Interpolaciones</h2>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <h3 class="section-title">10.1 El Comma Johanneum (1 Juan 5:7-8)</h3>
+
+      <div class="verse-card">
+        <p class="verse-text">"Porque tres son los que dan testimonio en el cielo: <strong>el Padre, el Verbo y el Espíritu Santo; y estos tres son uno. Y tres son los que dan testimonio en la tierra:</strong> el Espíritu, el agua y la sangre; y estos tres concuerdan."</p>
+        <span class="verse-ref">1 Juan 5:7-8 (RVR60) — Las palabras en negrita son el Comma Johanneum (interpolación)</span>
+      </div>
+
+      <p>La evidencia textual contra la autenticidad del Comma Johanneum es <strong>abrumadora</strong>:</p>
+
+      <table class="comparison-table">
+        <thead><tr><th>Evidencia</th><th>Detalle</th></tr></thead>
+        <tbody>
+          <tr><td>📜 <strong>Manuscritos griegos</strong></td><td>De más de 5,800 manuscritos griegos del NT, <em>ninguno</em> anterior al siglo XV contiene el Comma. Solo 4 tardíos (s. XVI), copiados de la Vulgata latina.</td></tr>
+          <tr><td>📖 <strong>Versiones antiguas</strong></td><td>No aparece en traducciones siraca, copta, armenia, etíope, árabe ni eslava antigua.</td></tr>
+          <tr><td>✍️ <strong>Padres griegos</strong></td><td>Ningún Padre griego (Orígenes, Atanasio, Crisóstomo, Cirilo) lo cita en sus polémicas trinitarias del siglo IV — habría sido el argumento definitivo.</td></tr>
+          <tr><td>✍️ <strong>Padres latinos</strong></td><td>Tertuliano, Cipriano, Agustín — ninguno cita el Comma a pesar de que habría sido el argumento decisivo.</td></tr>
+          <tr><td>📅 <strong>Primera aparición</strong></td><td>Glosa latina en escritos de Prisciliano de Ávila (~380 d.C.) como comentario marginal, incorporada al texto principal posteriormente.</td></tr>
+          <tr><td>🖊️ <strong>Erasmo</strong></td><td>Lo omitió en su edición crítica griega de 1516. Bajo presión eclesiástica y con un manuscrito griego fabricado ad hoc, lo incluyó en la edición de 1522.</td></tr>
+        </tbody>
+      </table>
+
+      <p><strong>Conclusión:</strong> El Comma Johanneum es una interpolación posterior. Este es el <em>consenso absoluto</em> de la crítica textual bíblica contemporánea. Versiones modernas (NIV, NVI, NASB, ESV, LBLA) lo omiten o lo colocan entre corchetes.</p>
+
+      <div class="note-box">La Biblia de Jerusalén (ed. española, 1975): "Estos versículos han sido interpolados en el texto latino, y no se encuentran en los manuscritos griegos más antiguos ni en las versiones más fidedignas."</div>
+
+      <div class="synthesis-box">
+        <p>El Comma Johanneum es el ejemplo más claro de cómo la presión teológica puede conducir a la interpolación de textos en apoyo de una doctrina. Si el texto trinitario más explícito del NT es una interpolación demostrada, la doctrina trinitaria no puede descansar en él. La honestidad exegética lo exige.</p>
+      </div>
+    </section>
+
+    <!-- ── COMPARACIÓN ── -->
+    <section class="chapter-section" id="comparacion">
+      <div class="chapter-header">
+        <div class="chapter-label">Capítulo 11</div>
+        <h2 class="chapter-title">Comparación Doctrinal: Trinidad, Binitarismo, Unitarismo y Modalismo</h2>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <table class="comparison-table">
+        <thead><tr><th>Doctrina</th><th>Naturaleza de Dios</th><th>Identidad del Hijo</th><th>Espíritu Santo</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Trinitarismo</strong></td><td>Un solo Dios en tres personas coiguales, coeternas y consustanciales</td><td>Segunda persona; Dios pleno; eternamente generado del Padre</td><td>Tercera persona; Dios pleno; procede del Padre (y del Hijo en Occidente)</td></tr>
+          <tr><td><strong>Binitarismo</strong></td><td>Un solo Dios en dos personas eternas: Padre e Hijo/Logos</td><td>Segunda persona divina, coigual y coeterno con el Padre</td><td>Fuerza/presencia de Dios y del Hijo, no persona separada</td></tr>
+          <tr><td><strong>Unitarismo Bíblico</strong></td><td>Un solo Dios que es una sola persona: el Padre</td><td>Agente preexistente; ser celestial o humano especialmente ungido; no coigual</td><td>Presencia, poder y actividad del único Dios Padre</td></tr>
+          <tr><td><strong>Modalismo</strong></td><td>Un solo Dios que se manifiesta en tres modos sucesivos</td><td>El Padre mismo encarnado; Jesús = el Padre en la tierra</td><td>El Padre mismo en modo Espíritu; no persona separada</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="section-title">¿Por qué el Modalismo es Rechazado?</h3>
+
+      <ul class="bullet-list">
+        <li>El bautismo de Jesús (Mateo 3:16-17): Padre, Hijo y Espíritu aparecen simultáneamente — imposible si son modos sucesivos del mismo ser</li>
+        <li>Las oraciones de Jesús al Padre implican distinción real entre quien ora y a quien se ora</li>
+        <li>Juan 17:5 implica relación preexistente entre el Hijo y el Padre antes de la encarnación</li>
+        <li>El NT distingue constantemente al Padre y al Hijo como dos sujetos relacionalmente distintos</li>
+      </ul>
+
+      <div class="synthesis-box">
+        <p>La posición que mejor harmoniza el monoteísmo bíblico con la exaltada identidad del Hijo es alguna forma de "unitarismo cristocéntrico": el Padre es el único Dios verdadero; el Hijo es su Agente eterno, verdaderamente divino en carácter y autoridad pero derivado y subordinado; el Espíritu es la presencia activa de ese único Dios.</p>
+      </div>
+    </section>
+
+    <!-- ── PATRÍSTICOS ── -->
+    <section class="chapter-section" id="patristicos">
+      <div class="chapter-header">
+        <div class="chapter-label">Capítulo 12</div>
+        <h2 class="chapter-title">Testimonios Patrísticos y Evidencia Histórica Temprana</h2>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <h3 class="section-title">12.1 Citas Históricas Clave</h3>
+
+      <div class="verse-card">
+        <p class="verse-text">"Tenemos al maestro de estas doctrinas, a Jesucristo... También a él, y al Padre que lo envió... adoramos y amamos."</p>
+        <span class="verse-ref">Justino Mártir, Primera Apología 6 (ca. 155 d.C.) — "en segundo lugar"</span>
+      </div>
+
+      <div class="verse-card">
+        <p class="verse-text">"El Padre es toda la sustancia, pero el Hijo es una derivación y porción del todo, como él mismo reconoció: 'Mi Padre es mayor que yo.'"</p>
+        <span class="verse-ref">Tertuliano, Adversus Praxean 9 (ca. 213 d.C.) — el inventor del término "Trinidad"</span>
+      </div>
+
+      <div class="verse-card">
+        <p class="verse-text">"El Dios y Padre... alcanza a cada uno de los seres existentes; el Hijo, siendo inferior al Padre, alcanza solo a los seres racionales."</p>
+        <span class="verse-ref">Orígenes, De Principiis I.3.5 (ca. 220 d.C.) — el mayor teólogo preniceno</span>
+      </div>
+
+      <h3 class="section-title">12.2 Conclusión Histórica</h3>
+
+      <table class="comparison-table">
+        <thead><tr><th>Período</th><th>Fechas</th><th>Posición Predominante</th></tr></thead>
+        <tbody>
+          <tr><td>Apostólico</td><td>30–100 d.C.</td><td>Monoteísmo centrado en el Padre; sin formulación trinitaria técnica</td></tr>
+          <tr><td>Subapostólico</td><td>100–150 d.C.</td><td>Distinción creciente Padre–Hijo; subordinacionismo implícito</td></tr>
+          <tr><td>Apologistas</td><td>150–200 d.C.</td><td>Hijo como "segundo Dios" subordinado; influencia platónica creciente</td></tr>
+          <tr><td>Tertuliano/Orígenes</td><td>200–260 d.C.</td><td>Acuñación de "trinitas"; pero con subordinacionismo explícito del Hijo</td></tr>
+          <tr><td>Crisis Arriana</td><td>260–325 d.C.</td><td>Debate homoousios vs heteroousios; polémica intensa</td></tr>
+          <tr><td>Nicea</td><td>325 d.C.</td><td>Adopción política del homoousios; debate continúa 56 años más</td></tr>
+          <tr><td>Constantinopla I</td><td>381 d.C.</td><td>Triunfo definitivo del trinitarismo; doctrina completa formulada</td></tr>
+        </tbody>
+      </table>
+
+      <div class="synthesis-box">
+        <p>El subordinacionismo —la creencia en la jerarquía ontológica Padre → Hijo— fue la posición predominante en el cristianismo durante los primeros tres siglos. La doctrina trinitaria de coigualdad absoluta es el producto de los debates del siglo IV y V, no la enseñanza original de los apóstoles ni de la mayoría de los Padres prenicenos.</p>
+      </div>
+    </section>
+
+    <!-- ── PROBLEMAS ── -->
+    <section class="chapter-section" id="problemas">
+      <div class="chapter-header">
+        <div class="chapter-label">Capítulo 13</div>
+        <h2 class="chapter-title">Problemas Filosóficos y Lógicos de la Doctrina Trinitaria</h2>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <h3 class="section-title">13.1 El Problema de la Coherencia Lógica</h3>
+      <p>La doctrina trinitaria afirma simultáneamente: (a) hay exactamente un Dios; (b) el Padre es Dios; (c) el Hijo es Dios; (d) el Espíritu Santo es Dios; (e) el Padre <em>no es</em> el Hijo; (f) el Hijo <em>no es</em> el Espíritu Santo; (g) el Espíritu Santo <em>no es</em> el Padre.</p>
+
+      <p>La lógica formal de la identidad (si A=C y B=C, entonces A=B) sugiere que si el Padre es Dios y el Hijo es Dios, entonces el Padre es el Hijo. Los teólogos trinitarios reconocen esta tensión y responden que la lógica ordinaria no aplica a la naturaleza divina. Pero entonces la doctrina se vuelve a-racional: ni susceptible de defensa ni de refutación lógica.</p>
+
+      <ul class="bullet-list">
+        <li><strong>Problema de la oración:</strong> Si el Hijo es coigual al Padre, ¿por qué Jesús ora, suplica en Getsemaní, y dice que "no sabe" lo que el Padre sabe?</li>
+        <li><strong>Problema del sufrimiento:</strong> Si el Hijo plenamente divino murió, ¿cómo puede Dios que es "inmortal" (1 Tim. 6:16) morir? Si solo murió la naturaleza humana, ¿tiene valor ontológico infinito el sacrificio?</li>
+        <li><strong>Problema de "persona":</strong> Si "persona" en la Trinidad no significa lo que normalmente entendemos por persona (conciencia individual, voluntad individual), la doctrina se comunica de manera potencialmente engañosa.</li>
+        <li><strong>Problema del Filioque:</strong> La controversia ¿procede el Espíritu del Padre solo (Oriente) o del Padre y del Hijo (Occidente)? es irresoluble dentro del marco trinitario porque la Escritura no la resuelve explícitamente.</li>
+      </ul>
+
+      <div class="synthesis-box">
+        <p>La doctrina trinitaria genera problemas filosóficos y lógicos reconocidos por sus propios defensores más honestos, que los describen como "misterios que trascienden la razón". Este reconocimiento debería hacer al creyente cauteloso ante la pretensión de que esta formulación específica es la única interpretación ortodoxa de la Escritura.</p>
+      </div>
+    </section>
+
+    <!-- ── ARMONIZACIÓN ── -->
+    <section class="chapter-section" id="armonizacion">
+      <div class="chapter-header">
+        <div class="chapter-label">Capítulo 14</div>
+        <h2 class="chapter-title">Armonización Completa de los Textos Bíblicos Relevantes</h2>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <h3 class="section-title">14.1 Textos que Afirman la Primacía del Padre</h3>
+
+      <table class="comparison-table">
+        <thead><tr><th>Texto</th><th>Afirmación</th></tr></thead>
+        <tbody>
+          <tr><td>Deuteronomio 6:4</td><td>YHWH es uno — Monoteísmo absoluto del AT</td></tr>
+          <tr><td>Isaías 44:6,8</td><td>"Yo soy el primero y el último; fuera de mí no hay Dios"</td></tr>
+          <tr><td>Juan 17:3</td><td>El Padre = "el único Dios verdadero"</td></tr>
+          <tr><td>1 Corintios 8:6</td><td>"Un solo Dios, el Padre"</td></tr>
+          <tr><td>1 Timoteo 2:5</td><td>"Un solo Dios, un mediador: Jesucristo hombre"</td></tr>
+          <tr><td>Juan 14:28</td><td>"El Padre mayor es que yo"</td></tr>
+          <tr><td>Mateo 24:36</td><td>Solo el Padre sabe el día y la hora</td></tr>
+          <tr><td>1 Corintios 15:28</td><td>"El Hijo mismo se sujetará al que le sujetó todo"</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="section-title">14.2 Textos sobre la Exaltada Identidad del Hijo</h3>
+
+      <table class="comparison-table">
+        <thead><tr><th>Texto</th><th>Afirmación</th><th>Interpretación No Trinitaria</th></tr></thead>
+        <tbody>
+          <tr><td>Juan 1:1-3</td><td>"En el principio era el Logos..."</td><td>Preexistencia del Hijo como ser celestial derivado y agente creador</td></tr>
+          <tr><td>Juan 20:28</td><td>Tomás: "Señor mío y Dios mío"</td><td>Exclamación de reconocimiento de soberanía; doxología, no formulación ontológica</td></tr>
+          <tr><td>Hebreos 1:8</td><td>"Tu trono, oh Dios" al Hijo</td><td>El Hijo recibe el título como Rey davídico eterno que representa a YHWH; su "Dios" es el Padre (v. 9)</td></tr>
+          <tr><td>Colosenses 1:15-17</td><td>"Primogénito de toda creación"</td><td>Preeminencia del Hijo sobre toda creación; agente de Dios, no Dios independiente</td></tr>
+          <tr><td>Filipenses 2:6</td><td>"En forma de Dios"</td><td>Naturaleza/carácter divino del Logos preexistente; no necesariamente identidad con el Padre</td></tr>
+        </tbody>
+      </table>
+
+      <div class="synthesis-box">
+        <p>Una lectura coherente de todos los textos bíblicos relevantes apoya una teología donde: el Padre es el único Dios verdadero (Theos en sentido absoluto); el Hijo es el Logos/Agente eterno de ese Dios, verdaderamente divino en carácter y funciones pero derivado y subordinado; y el Espíritu es la presencia activa de ese Dios en el mundo.</p>
+      </div>
+    </section>
+
+    <!-- ── CONCLUSIÓN ── -->
+    <section class="chapter-section" id="conclusion">
+      <div class="chapter-header">
+        <div class="chapter-label">Capítulo 15</div>
+        <h2 class="chapter-title">Conclusión Doctrinal Final e Implicaciones Espirituales</h2>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <h3 class="section-title">15.1 Hallazgos Exegéticos Centrales</h3>
+
+      <ul class="bullet-list">
+        <li>El AT enseña monoteísmo estricto: YHWH es uno. Los plurales hebreos no requieren pluralidad de personas divinas.</li>
+        <li>El NT identifica al Padre como "el único Dios verdadero" (Juan 17:3), "el único Dios" (1 Corintios 8:6), "el único y sabio Dios" (1 Timoteo 1:17).</li>
+        <li>El Hijo es un ser preexistente de carácter divino, agente de la creación y revelación, consistentemente distinguido del Padre y subordinado a él.</li>
+        <li>El Espíritu Santo es la presencia activa de Dios en el mundo y los creyentes — no una tercera persona separada y coigual.</li>
+        <li>La doctrina trinitaria en su forma técnica es una elaboración filosófica del siglo IV, influida por categorías platónicas y aristotélicas ajenas al pensamiento hebreo bíblico.</li>
+        <li>El Comma Johanneum, el texto trinitario más explícito del NT, es una interpolación posterior demostrada por consenso académico unánime.</li>
+      </ul>
+
+      <h3 class="section-title">15.2 La Doctrina que la Escritura Enseña Explícitamente</h3>
+
+      <div class="verse-card">
+        <p class="verse-text">Un solo Dios verdadero: el Padre, YHWH de Israel. Un solo Señor: Jesucristo, su Agente y Mediador. Un solo Espíritu: la presencia activa del Padre y del Hijo en los creyentes.</p>
+        <span class="verse-ref">Síntesis de Deut. 6:4 · Juan 17:3 · 1 Cor. 8:6 · 1 Tim. 2:5 · Romanos 8:9</span>
+      </div>
+
+      <h3 class="section-title">15.3 Implicaciones Prácticas</h3>
+
+      <ul class="bullet-list">
+        <li><strong>La oración</strong> se dirige al Padre, en el nombre de Jesús, a través del poder del Espíritu (Efesios 2:18; Juan 16:23)</li>
+        <li><strong>La adoración</strong> se dirige al Padre como fuente última, con gratitud suprema al Hijo por su obra redentora (Juan 4:23-24)</li>
+        <li><strong>La salvación</strong> es el plan del Padre, ejecutado por el Hijo, aplicado por el Espíritu — obra coordinada de tres actores distintos</li>
+        <li><strong>La esperanza escatológica</strong> culmina en que "Dios sea todo en todos" (1 Corintios 15:28) — el Hijo sujeto al Padre, unidad final en amor</li>
+      </ul>
+
+      <div class="verse-card">
+        <p class="verse-text">"Y conoceréis la verdad, y la verdad os hará libres."</p>
+        <span class="verse-ref">Juan 8:32 (RVR60)</span>
+      </div>
+
+      <div class="synthesis-box">
+        <p>La doctrina bíblica de Dios, derivada exclusivamente de la Escritura en sus contextos originales, apunta a un Dios que es el Padre, único en su divinidad absoluta, quien revela su carácter perfectamente en su Hijo Jesucristo, y cuya presencia activa en el mundo es el Espíritu Santo. Esta comprensión honra el monoteísmo hebreo, la exaltada identidad del Hijo, y el testimonio del NT sin recurrir a categorías filosóficas extrabíblicas.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div>✦ LA DOCTRINA DE LA DEIDAD BÍBLICA ✦</div>
+  <div>Estudio Exegético, Histórico y Teológico — Perspectiva No Trinitaria</div>
+  <div style="margin-top:0.5rem"><span>Solo Scriptura</span> · <span>Hebreo · Arameo · Griego Koiné</span> · <span>Mayo 2026</span></div>
+  <div style="margin-top:0.3rem; opacity:0.5; font-size:0.65rem">Léxicos: BDB · BDAG · Gesenius · Thayer · Strong · Metzger · Ehrman · Harnack · Dunn</div>
+</footer>
+
+<!-- Back to top -->
+<button id="backToTop" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modalContent">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// ─── SEARCH DATA ───────────────────────────────────────────────────────────────
+const searchData = [
+  { chapter:"Cap. 1", title:"Introducción y Metodología", anchor:"#intro",
+    content:"La pregunta fundamental sobre la naturaleza de Dios. Monoteísmo trinitarismo binitarismo modalismo arrianismo. Sola Scriptura como principio metodológico. Definición de términos: ousia hypostasis persona esencia sustancia." },
+  { chapter:"Cap. 2", title:"Historia del Dogma Trinitario", anchor:"#historia",
+    content:"Desarrollo histórico desde los apóstoles hasta Nicea. Padres apostólicos Justino Mártir Tertuliano Orígenes. Subordinacionismo preniceno. Arrio Atanasio homoousios. Constantino Imperio Romano crisis arriana. 1 Corintios 1:3 fórmula paulina." },
+  { chapter:"Cap. 3", title:"Los Concilios Ecuménicos", anchor:"#concilios",
+    content:"Concilio de Nicea 325 Constantinopla 381 Calcedonia 451. Influencia filosófica griega platónica aristotélica. Ousia hypostasis prosopon homoousios homoiousios heteroousios. Filioque Gran Cisma. Constancio Teodosio." },
+  { chapter:"Cap. 4", title:"El Monoteísmo Hebreo — Shemá", anchor:"#monoteismo",
+    content:"Shemá Yisrael Deuteronomio 6:4. Análisis de Echad vs Yachid H259 H3173. Plural Elohim plural de majestad plural intensivo. Génesis 1:26 hagamos imagen semejanza consejo celestial. BDB Gesenius gramática hebraica. Yahweh YHWH Tetragrámaton." },
+  { chapter:"Cap. 5", title:"El Padre como Único Dios Verdadero", anchor:"#padre",
+    content:"Juan 17:3 único Dios verdadero ton monon alethon Theon. 1 Corintios 8:6 un solo Dios el Padre heis Theos. 1 Timoteo 2:5 mediador hombre. Juan 14:28 el Padre mayor es que yo. Mateo 24:36 solo el Padre sabe. Marcos 10:18 ninguno bueno sino Dios." },
+  { chapter:"Cap. 6", title:"Léxico: Términos Originales Hebreos y Griegos", anchor:"#lexicon",
+    content:"YHWH Yahweh Tetragrámaton H3068 hayah. Elohim H430 plural majestad. Adonai H136. Ruaj H7307 viento espíritu aliento. Theos G2316 Kyrios G2962. Logos G3056 Filón platonismo. Monogenes G3439 unigénito generado. Pneuma G4151 espíritu. Huios tou Theou hijo de Dios. Echad yachid. Strong Thayer BDAG." },
+  { chapter:"Cap. 7", title:"La Identidad del Hijo — Juan 1:1 y más", anchor:"#hijo",
+    content:"Juan 1:1 Logos Theos en ho Logos gramática griega artículo determinado. Regla de Colwell Philip Harner naturaleza divina. Juan 8:58 ego eimi antes de Abraham yo soy. Juan 10:30 hen esmen neutro unidad propósito. Filipenses 2:5-11 kénosis morphe Theou harpagmos exaltación. Colosenses 1:15-17 primogénito prototokos creación. Hebreos 1 charakter hypostasis. Preexistencia subordinación." },
+  { chapter:"Cap. 8", title:"El Espíritu Santo", anchor:"#espiritu",
+    content:"Espíritu Santo Ruaj Elohim Pneuma Hagion. Salmo 139:7 Espíritu presencia panim. Romanos 8:9 Espíritu de Dios Espíritu de Cristo equivalentes. Juan 16:13 no habla por su cuenta oye subordinación. Juan 14:26 Consolador Padre envía nombre del Hijo. Hechos 5:3-4 mentir al Espíritu mentir a Dios. Tercera persona o presencia divina." },
+  { chapter:"Cap. 9", title:"Textos Trinitarios Clásicos Analizados", anchor:"#textos",
+    content:"Mateo 28:19 bautismo Padre Hijo Espíritu nombre singular onoma. Hechos 2:38 nombre de Jesucristo. Eusebio cita forma corta prenicena. Isaías 9:6 El Gibbor Abi-Ad Padre eterno Príncipe de paz. Hebreos 1:8 tu trono oh Dios Dios tuyo. Apocalipsis 1:8 Alfa Omega Todopoderoso. Juan 20:28 Tomás Señor mío Dios mío." },
+  { chapter:"Cap. 10", title:"Crítica Textual — Comma Johanneum", anchor:"#critica",
+    content:"Comma Johanneum 1 Juan 5:7 interpolación. Manuscritos griegos ninguno anterior siglo XV. Padres griegos Orígenes Atanasio Crisóstomo no lo citan. Prisciliano glosa latina 380 dC. Erasmo 1516 1522 manuscrito fabricado. Vulgata latina. Juan 1:18 monogenes Theos vs Huios. Mateo 28:19 Eusebio. Crítica textual Metzger Ehrman." },
+  { chapter:"Cap. 11", title:"Comparación Doctrinal: Trinidad vs Unitarismo vs Modalismo", anchor:"#comparacion",
+    content:"Trinidad trinitarismo binitarismo unitarismo bíblico modalismo sabelianismo. Tres personas coiguales coeternas consustanciales. Un solo Dios el Padre. Modos sucesivos. Bautismo Mateo 3:16-17 simultáneo. Oneness Pentecostalism Pentecostalismo Unitario. Arrio Sabelio." },
+  { chapter:"Cap. 12", title:"Testimonios Patrísticos", anchor:"#patristicos",
+    content:"Padres apostólicos Clemente de Roma Ignacio Antioquía Pastor Hermas. Justino Mártir segundo Dios deuteros Theos. Tertuliano trinitas una substantia tres personae derivación porción. Orígenes segundo Dios inferior Padre seres racionales. Subordinacionismo patrístico preniceno." },
+  { chapter:"Cap. 13", title:"Problemas Filosóficos de la Trinidad", anchor:"#problemas",
+    content:"Coherencia lógica identidad A igual C B igual C entonces A igual B. Problema oración Jesús ora al Padre Getsemaní. Problema sufrimiento muerte inmortalidad 1 Timoteo 6:16. Persona hypostasis definición triteísmo. Filioque Occidente Oriente Juan 15:26 procede del Padre. Gran Cisma 1054." },
+  { chapter:"Cap. 14", title:"Armonización Completa de Textos Bíblicos", anchor:"#armonizacion",
+    content:"Armonización textos bíblicos Deuteronomio 6:4 Isaías 44:6 Juan 17:3 1 Corintios 8:6 1 Timoteo 2:5 Juan 14:28 Mateo 24:36 1 Corintios 15:28. Juan 1:1 20:28 Hebreos 1 Colosenses 1 Filipenses 2. Génesis 1:2 Salmo 139:7 Romanos 8:9 Juan 16:13." },
+  { chapter:"Cap. 15", title:"Conclusión Doctrinal Final", anchor:"#conclusion",
+    content:"Conclusión doctrinal. Un solo Dios el Padre. Un solo Señor Jesucristo mediador. Un solo Espíritu presencia activa. Implicaciones prácticas oración adoración salvación esperanza escatológica. 1 Corintios 15:28 Dios todo en todos. Juan 8:32 la verdad os hará libres. Sola Scriptura monoteísmo." },
+];
+
+// ─── SEARCH LOGIC ─────────────────────────────────────────────────────────────
+function highlight(text, query) {
+  if (!query) return text;
+  const re = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+  return text.replace(re, '<mark>$1</mark>');
+}
+
+function performSearch() {
+  const query = document.getElementById('searchInput').value.trim();
+  if (!query) return;
+  showResults(query);
+}
+
+function quickSearch(term) {
+  document.getElementById('searchInput').value = term;
+  showResults(term);
+}
+
+function showResults(query) {
+  const q = query.toLowerCase();
+  const container = document.getElementById('searchResults');
+  const results = searchData.filter(item =>
+    item.title.toLowerCase().includes(q) ||
+    item.content.toLowerCase().includes(q) ||
+    item.chapter.toLowerCase().includes(q)
+  );
+
+  if (results.length === 0) {
+    container.innerHTML = `<div class="result-item"><div class="result-title" style="color:#888">No se encontraron resultados para "${query}"</div></div>`;
+  } else {
+    container.innerHTML = results.map(r => `
+      <div class="result-item" onclick="goTo('${r.anchor}')">
+        <div class="result-chapter">${r.chapter}</div>
+        <div class="result-title">${highlight(r.title, query)}</div>
+        <div class="result-snippet">${highlight(r.content.slice(0, 120), query)}…</div>
+      </div>
+    `).join('');
+  }
+
+  container.classList.add('active');
+}
+
+function goTo(anchor) {
+  document.getElementById('searchResults').classList.remove('active');
+  const el = document.querySelector(anchor);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+document.getElementById('searchInput').addEventListener('input', function() {
+  const q = this.value.trim();
+  if (q.length > 1) showResults(q);
+  else document.getElementById('searchResults').classList.remove('active');
+});
+
+document.getElementById('searchInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') performSearch();
+  if (e.key === 'Escape') document.getElementById('searchResults').classList.remove('active');
+});
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.search-box')) {
+    document.getElementById('searchResults').classList.remove('active');
+  }
+});
+
+// ─── SCROLL OBSERVER ──────────────────────────────────────────────────────────
+const sections = document.querySelectorAll('.chapter-section');
+const navLinks = document.querySelectorAll('.nav-links a');
+const tocLinks = document.querySelectorAll('.toc-item');
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      const id = e.target.getAttribute('id');
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+      });
+      tocLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+      });
+    }
+  });
+}, { threshold: 0.05, rootMargin: '-60px 0px -40% 0px' });
+
+sections.forEach(s => obs.observe(s));
+
+// ─── PROGRESS BAR ─────────────────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  document.getElementById('readProgress').style.width = pct + '%';
+
+  const btn = document.getElementById('backToTop');
+  btn.classList.toggle('visible', scrollTop > 400);
+});
+
+// ─── MODAL ────────────────────────────────────────────────────────────────────
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('modalOverlay')) {
+    document.getElementById('modalOverlay').classList.remove('open');
+  }
+}
+</script>
+</body>
+</html>
